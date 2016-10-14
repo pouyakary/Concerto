@@ -1,0 +1,25 @@
+{
+  "name": "concerto",
+  "version": "0.0.1",
+  "description": "A compiler to compile RegEx into Quartet Language's Block XML",
+  "main": "bin/concerto.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karyfoundation/concerto.git"
+  },
+  "keywords": [
+    "Quartet",
+    "RegEx",
+    "Orchestra",
+    "Wildcard"
+  ],
+  "author": "Kary Foundation",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/karyfoundation/concerto/issues"
+  },
+  "homepage": "https://github.com/karyfoundation/concerto#readme"
+}

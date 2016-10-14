@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "target": "es5",
+        "outFile": "bin/concerto.js",
+        "noImplicitAny": false,
+        "sourceMap": false
+    }
+}
