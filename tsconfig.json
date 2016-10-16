@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
-        "module": "amd",
+        "module": "commonjs",
         "target": "es5",
-        "outFile": "bin/concerto.js",
+        "outDir": "bin",
         "noImplicitAny": false,
+        "removeComments": true,
         "sourceMap": false
     }
 }
