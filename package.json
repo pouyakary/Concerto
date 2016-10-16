@@ -1,5 +1,5 @@
 {
-  "name": "concerto",
+  "name": "concertojs",
   "version": "0.0.1",
   "description": "A compiler to compile RegEx into Quartet Language's Block XML",
   "main": "bin/index.js",
