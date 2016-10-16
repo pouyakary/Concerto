@@ -16,7 +16,7 @@
     import * as repeats from '../generators/nodes/repeats';
 
     // nodes
-    import * as exact from '../generators/nodes/exact'
+    import * as exactNode from '../generators/nodes/exact'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -30,6 +30,8 @@
         // this handles each node
         for ( let node of tree )
             ast.push( handleOneNode( node ) );
+
+        return ast;
     }
 
 //
@@ -42,8 +44,9 @@
         let block;
         switch ( node.type ) {
             case 'exact':
-                block = exact.generate( node )
+                block = exactNode.generate( node );
                 break;
+
         }
 
         // then we handle the repeat of the block

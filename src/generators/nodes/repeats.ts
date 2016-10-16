@@ -63,7 +63,9 @@
             type: repeatType,
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]}}
+            ]
+        }
+    }
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
@@ -80,7 +82,9 @@
             }],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]}}
+            ]
+        }
+    }
 
 //
 // ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
@@ -97,7 +101,9 @@
             }],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]}}
+            ]
+        }
+    }
 
 //
 // ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
@@ -115,6 +121,8 @@
             ],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]}}
+            ]
+        }
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -19,7 +19,6 @@
             name: name,
             children: ( blocksOrBlocks.length === undefined )?
                 [ blocksOrBlocks ] : blocksOrBlocks
-        }
-    }
+    }}
 
 // ────────────────────────────────────────────────────────────────────────────────
