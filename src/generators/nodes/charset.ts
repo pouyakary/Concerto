@@ -19,7 +19,6 @@
         if ( node.ranges.length === 1 && node.chars === '' )
             return composeRangeBlock( node.ranges[ 0 ] )
 
-
     }
 
 //

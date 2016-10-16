@@ -17,7 +17,7 @@
 
     // nodes
     import * as exactNode from '../generators/nodes/exact'
-    import * as setNode from '../generators/nodes/set'
+    import * as charsetNode from '../generators/nodes/charset'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -46,10 +46,11 @@
         switch ( node.type ) {
             case 'exact':
                 block = exactNode.generate( <blueprints.regulex.INodeExact> node )
-                break;
+                break
 
-            case 'set':
-                block = setNode.generate( <blueprints.regulex.INodeSet> node )
+            case 'charset':
+                block = charsetNode.generate( <blueprints.regulex.INodeSet> node )
+                break
         }
 
         // then we handle the repeat of the block

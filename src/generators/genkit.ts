@@ -17,8 +17,8 @@
                                         blueprints.block.IStatement {
         return {
             name: name,
-            children: ( blocksOrBlocks.length === undefined )?
-                [ blocksOrBlocks ] : blocksOrBlocks
+            children: ( blocksOrBlocks.constructor === Array )?
+                 blocksOrBlocks : [ blocksOrBlocks ]
         }
     }
 

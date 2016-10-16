@@ -16,10 +16,7 @@
                                      blueprints.block.IBlock {
         return {
             type: 'encode',
-            fields: [{
-                name: 'text',
-                value: node.chars
-            }]
+            fields: [{ name: 'text', value: node.chars }]
         }
     }
 

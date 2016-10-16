@@ -21,11 +21,12 @@
     export function generate ( node: blueprints.regulex.IBaseNode,
                               block: blueprints.block.IBlock ):
                                      blueprints.block.IBlock {
-        let min = node.repeat.min
-        let max = node.repeat.max
 
         // No Repeat
         if ( node.repeat === undefined ) return block
+
+        let min = node.repeat.min
+        let max = node.repeat.max
 
         // Maybe block
         if ( min === 0 && max === 1 )
