@@ -12,13 +12,13 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.IBaseNode ):
+    export function generate ( node: blueprints.regulex.INodeExact ):
                                      blueprints.block.IBlock {
         return {
             type: 'encode',
             fields: [{
                 name: 'text',
-                value: ( <blueprints.regulex.INodeExact> node ).chars
+                value: node.chars
             }]
         }
     }
