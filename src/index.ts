@@ -21,16 +21,16 @@
 
     export function compile ( text: string ) {
         // testing the regex we already have:
-        let ast: blueprints.regulex.IRegExAST;
+        let ast: blueprints.regulex.IRegExAST
         try {
-            ast = regulex.parse( text );
+            ast = regulex.parse( text )
         }
         catch ( error ) {
-            throw error;
+            throw error
         }
 
         // first level compilation: Regulex AST to Concerto AST
-        let concertoAST = regulexToConcertoCompiler.compile( ast.tree );
+        let concertoAST = regulexToConcertoCompiler.compile( ast.tree )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

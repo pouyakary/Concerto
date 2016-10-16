@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit';
+    import * as genkit from '../genkit'
 
 //
 // ─── GENERATORS ─────────────────────────────────────────────────────────────────
@@ -21,35 +21,34 @@
     export function generate ( node: blueprints.regulex.IBaseNode,
                               block: blueprints.block.IBlock ):
                                      blueprints.block.IBlock {
+        let min = node.repeat.min
+        let max = node.repeat.max
 
         // No Repeat
-        if ( node.repeat === undefined ) return block;
-
-        let min = node.repeat.min;
-        let max = node.repeat.max;
+        if ( node.repeat === undefined ) return block
 
         // Maybe block
         if ( min === 0 && max === 1 )
-            return composeStaticRepeat( 'maybe', block );
+            return composeStaticRepeat( 'maybe', block )
 
         // One or More
         if ( min === 1 && max === Infinity )
-            return composeStaticRepeat( 'one_or_more', block );
+            return composeStaticRepeat( 'one_or_more', block )
 
         // Any number of
         if ( min === 0 && max === Infinity )
-            return composeStaticRepeat( 'any_number_of', block );
+            return composeStaticRepeat( 'any_number_of', block )
 
         // Exact Repeat
         if ( min === max )
-            return composeExactRepeat( min, block );
+            return composeExactRepeat( min, block )
 
         // At least repeat
         if ( max === Infinity )
-            return composeAtLeastRepeat( min, block );
+            return composeAtLeastRepeat( min, block )
 
         // Range Repeat
-        return composeRangeRepeat( min, max, block );
+        return composeRangeRepeat( min, max, block )
     }
 
 //
