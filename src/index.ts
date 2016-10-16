@@ -12,8 +12,8 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as regulex from 'regulex';
-    import * as regulexToConcertoCompiler from './compilers/regulex-to-concerto';
+    import * as regulex from 'regulex'
+    import * as regulexToConcertoCompiler from './compilers/regulex-to-concerto'
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
