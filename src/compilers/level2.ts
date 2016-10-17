@@ -18,7 +18,7 @@
         let children: blueprints.recarr.IStatement[ ] = [ ];
 
         // is there any children?
-        if ( firstIndex.children !== undefined || firstIndex.children !== null )
+        if ( firstIndex.children !== undefined && firstIndex.children !== null )
             for ( let statement of firstIndex.children )
                 children.push({
                     name: statement.name,

@@ -12,8 +12,9 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as regulex from 'regulex'
-    import * as regulexToConcertoCompiler from './compilers/regulex-to-concerto'
+    import * as regulex                     from 'regulex'
+    import * as regulexToConcertoCompiler   from './compilers/level1'
+    import * as concertoToRecarrCompiler    from './compilers/level2'
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
@@ -21,16 +22,21 @@
 
     export function compile ( text: string ) {
         // testing the regex we already have:
-        let ast: blueprints.regulex.IRegExAST
+        let regulexAST: blueprints.regulex.IRegExAST
         try {
-            ast = regulex.parse( text )
+            regulexAST = regulex.parse( text )
         }
         catch ( error ) {
             throw error
         }
 
         // first level compilation: Regulex AST to Concerto AST
-        let concertoAST = regulexToConcertoCompiler.compile( ast.tree )
+        let concertoAST = regulexToConcertoCompiler.compile( regulexAST.tree )
+        console.log( concertoAST )
+
+        // then we compile the concerto ast to recursive array ast
+        let recarrAST = concertoToRecarrCompiler.compile( concertoAST )
+        console.log( recarrAST )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
