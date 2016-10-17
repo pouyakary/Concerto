@@ -31,8 +31,7 @@
         // adding statements
         if ( block.statements !== undefined )
             for ( let statement of block.statements )
-                result.push(
-                    `<statement name="${ statement.name }">${ generateBlockXML( statement.block ) }</statement>`)
+                result.push( `<statement name="${ statement.name }">${ generateBlockXML( statement.block ) }</statement>`)
 
         // adding the next block
         if ( block.next !== null && block.next !== undefined )
