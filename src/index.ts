@@ -30,12 +30,17 @@
             throw error
         }
 
+        console.log('--- Regulex AST --------------------------')
+        console.log( regulexAST )
+
         // first level compilation: Regulex AST to Concerto AST
         let concertoAST = regulexToConcertoCompiler.compile( regulexAST.tree )
+        console.log('--- Concerto AST -------------------------')
         console.log( concertoAST )
 
         // then we compile the concerto ast to recursive array ast
         let recarrAST = concertoToRecarrCompiler.compile( concertoAST )
+        console.log('--- Concerto Recursive Array AST ---------')
         console.log( recarrAST )
     }
 
