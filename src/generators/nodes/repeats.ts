@@ -25,31 +25,31 @@
         // No Repeat
         if ( node.repeat === undefined ) return block
 
-        let min = node.repeat.min
-        let max = node.repeat.max
+
+        let min = node.repeat.min, max = node.repeat.max
 
         // Maybe block
         if ( min === 0 && max === 1 )
             return composeStaticRepeat( 'maybe', block )
 
         // One or More
-        if ( min === 1 && max === Infinity )
+        else if ( min === 1 && max === Infinity )
             return composeStaticRepeat( 'one_or_more', block )
 
         // Any number of
-        if ( min === 0 && max === Infinity )
+        else if ( min === 0 && max === Infinity )
             return composeStaticRepeat( 'any_number_of', block )
 
         // Exact Repeat
-        if ( min === max )
+        else if ( min === max )
             return composeExactRepeat( min, block )
 
         // At least repeat
-        if ( max === Infinity )
+        else if ( max === Infinity )
             return composeAtLeastRepeat( min, block )
 
         // Range Repeat
-        return composeRangeRepeat( min, max, block )
+        else return composeRangeRepeat( min, max, block )
     }
 
 //
@@ -63,9 +63,7 @@
             type: repeatType,
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]
-        }
-    }
+            ]}}
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
@@ -82,9 +80,7 @@
             }],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]
-        }
-    }
+            ]}}
 
 //
 // ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
@@ -101,9 +97,7 @@
             }],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]
-        }
-    }
+            ]}}
 
 //
 // ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
@@ -121,8 +115,6 @@
             ],
             children: [
                 genkit.generateStatement( blockOrBlocks )
-            ]
-        }
-    }
+            ]}}
 
 // ────────────────────────────────────────────────────────────────────────────────
