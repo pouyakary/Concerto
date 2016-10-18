@@ -58,7 +58,12 @@
         }
 
         // done!
-        return quartetXML
+        return quartetXML.replace( /\\"|"|\n/g, match => {
+            if ( match === '"' )
+                return '\\"'
+            if ( match === '\n' )
+                return ''
+        });
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -14,8 +14,9 @@
 
     export function compile ( concertoAST: blueprints.block.IBlock[ ] ):
                                            blueprints.recarr.INode {
+
         let firstIndex = concertoAST[ 0 ]
-        let children: blueprints.recarr.IStatement[ ] = [ ];
+        let children = new Array<blueprints.recarr.IStatement> ( )
 
         // is there any children?
         if ( firstIndex.children !== undefined && firstIndex.children !== null )
