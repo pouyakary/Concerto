@@ -13,11 +13,12 @@
 //
 
     // tools
-    import * as repeats from '../generators/nodes/repeats';
+    import * as repeats     from '../generators/nodes/repeats';
 
     // nodes
-    import * as exactNode from '../generators/nodes/exact'
+    import * as exactNode   from '../generators/nodes/exact'
     import * as charsetNode from '../generators/nodes/charset'
+    import * as groupNode   from '../generators/nodes/group'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -25,13 +26,14 @@
 
     /** Compiles _Regulex AST_ into _Concerto AST_ */
     export function compile ( tree: blueprints.regulex.IBaseNode[ ] ) {
-        /** This is where we store the AST at each level */
-        let ast = [ ];
-
-        // this handles each node
-        for ( let node of tree )
-            ast.push( handleOneNode( node ) );
-
+        let ast = new Array<blueprints.block.IBlock> ( )
+        for ( let node of tree ) {
+            let intermediateNode =  handleOneNode( node )
+            if ( intermediateNode.type === blueprints.block.IntermediateNodeType.Block )
+                ast.push( intermediateNode.value[ 0 ] )
+            else
+                ast.concat( intermediateNode.value )
+        }
         return ast;
     }
 
@@ -40,21 +42,29 @@
 //
 
     function handleOneNode ( node: blueprints.regulex.IBaseNode ):
-                                   blueprints.block.IBlock {
+                                   blueprints.block.IIntermediateNode {
+
         // firs we handle the block
-        let block;
+        let intermediateNode
         switch ( node.type ) {
             case 'exact':
-                block = exactNode.generate( <blueprints.regulex.INodeExact> node )
+                intermediateNode =
+                    exactNode.generate(<blueprints.regulex.INodeExact> node )
                 break
 
             case 'charset':
-                block = charsetNode.generate( <blueprints.regulex.INodeSet> node )
+                intermediateNode =
+                    charsetNode.generate( <blueprints.regulex.INodeSet> node )
                 break
-        }
+
+            case 'group':
+                intermediateNode =
+                    groupNode.generate( <blueprints.regulex.INodeGroup> node )
+                break
+            }
 
         // then we handle the repeat of the block
-        return repeats.generate( node, block );
+        return repeats.generate( intermediateNode )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

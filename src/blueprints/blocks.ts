@@ -43,6 +43,18 @@ module blueprints.block {
             children?: IStatement[ ];
         }
 
+    //
+    // ─── LEVEL ONE SWITCHER ─────────────────────────────────────────────────────────
+    //
+
+        export enum IntermediateNodeType { Block, Sequence }
+
+        export interface IIntermediateNode {
+            type: IntermediateNodeType;
+            node: blueprints.regulex.IBaseNode;
+            value: IBlock[ ]
+        }
+
     // ────────────────────────────────────────────────────────────────────────────────
 
 }

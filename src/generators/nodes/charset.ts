@@ -15,11 +15,25 @@
     import * as genkit from '../genkit'
 
 //
-// ─── GENERATOR ──────────────────────────────────────────────────────────────────
+// ─── EXPORT ─────────────────────────────────────────────────────────────────────
 //
 
     export function generate ( node: blueprints.regulex.INodeSet ):
-                                     blueprints.block.IBlock {
+                                     blueprints.block.IIntermediateNode {
+        return {
+            type: blueprints.block.IntermediateNodeType.Block,
+            node: node,
+            value: [
+                switchForSetGenerator( node )
+        ]}}
+
+//
+// ─── GENERATOR ──────────────────────────────────────────────────────────────────
+//
+
+    function switchForSetGenerator ( node: blueprints.regulex.INodeSet ):
+                                           blueprints.block.IBlock {
+
         // Simple Range
         if ( node.ranges.length === 1 && node.chars === '' && node.exclude === undefined )
             return composeRangeBlock( node.ranges[ 0 ] , 'range' )

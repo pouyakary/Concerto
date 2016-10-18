@@ -18,38 +18,46 @@
 // ─── GENERATORS ─────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.IBaseNode,
-                              block: blueprints.block.IBlock ):
-                                     blueprints.block.IBlock {
+    export function generate ( intermediateNode: blueprints.block.IIntermediateNode ):
+                                                 blueprints.block.IIntermediateNode {
 
         // No Repeat
-        if ( node.repeat === undefined ) return block
+        if ( intermediateNode.node.repeat === undefined ) return intermediateNode
 
-
-        let min = node.repeat.min, max = node.repeat.max
+        let min     = intermediateNode.node.repeat.min
+        let max     = intermediateNode.node.repeat.max
+        let block   = intermediateNode.value
+        let result
 
         // Maybe block
         if ( min === 0 && max === 1 )
-            return composeStaticRepeat( 'maybe', block )
+            result = composeStaticRepeat( 'maybe', block )
 
         // One or More
         else if ( min === 1 && max === Infinity )
-            return composeStaticRepeat( 'one_or_more', block )
+            result = composeStaticRepeat( 'one_or_more', block )
 
         // Any number of
         else if ( min === 0 && max === Infinity )
-            return composeStaticRepeat( 'any_number_of', block )
+            result = composeStaticRepeat( 'any_number_of', block )
 
         // Exact Repeat
         else if ( min === max )
-            return composeExactRepeat( min, block )
+            result = composeExactRepeat( min, block )
 
         // At least repeat
         else if ( max === Infinity )
-            return composeAtLeastRepeat( min, block )
+            result = composeAtLeastRepeat( min, block )
 
         // Range Repeat
-        else return composeRangeRepeat( min, max, block )
+        else result = composeRangeRepeat( min, max, block )
+
+        // done
+        return {
+            type: blueprints.block.IntermediateNodeType.Block,
+            node: intermediateNode.node,
+            value: result
+        }
     }
 
 //
@@ -57,7 +65,7 @@
 //
 
     function composeStaticRepeat ( repeatType: string,
-                                blockOrBlocks: blueprints.block.IBlock ):
+                                blockOrBlocks: blueprints.block.IBlock[ ] ):
                                                blueprints.block.IBlock {
         return {
             type: repeatType,
@@ -70,7 +78,7 @@
 //
 
     function composeExactRepeat ( count: number,
-                          blockOrBlocks: blueprints.block.IBlock ):
+                          blockOrBlocks: blueprints.block.IBlock[ ] ):
                                          blueprints.block.IBlock {
         return {
             type: 'repeat',
@@ -87,7 +95,7 @@
 //
 
     function composeAtLeastRepeat ( min: number,
-                          blockOrBlocks: blueprints.block.IBlock ):
+                          blockOrBlocks: blueprints.block.IBlock[ ] ):
                                          blueprints.block.IBlock {
         return {
             type: 'repeat_at_least',
@@ -105,7 +113,7 @@
 
     function composeRangeRepeat ( min: number,
                                   max: number,
-                        blockOrBlocks: blueprints.block.IBlock ):
+                        blockOrBlocks: blueprints.block.IBlock[ ] ):
                                        blueprints.block.IBlock {
         return {
             type: 'repeat_in_range',

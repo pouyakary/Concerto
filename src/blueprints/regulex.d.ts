@@ -87,6 +87,7 @@ declare module blueprints.regulex {
 
         interface INodeGroup extends IBaseNode {
             sub: IBaseNode[ ];
+            nonCapture?: boolean;
         }
 
     // ────────────────────────────────────────────────────────────────────────────────

@@ -13,11 +13,13 @@
 //
 
     export function generate ( node: blueprints.regulex.INodeExact ):
-                                     blueprints.block.IBlock {
+                                     blueprints.block.IIntermediateNode {
         return {
-            type: 'encode',
-            fields: [{ name: 'text', value: node.chars }]
-        }
-    }
+            type: blueprints.block.IntermediateNodeType.Block,
+            node: node,
+            value: [{
+                type: 'encode',
+                fields: [{ name: 'text', value: node.chars }]
+            }]}}
 
 // ────────────────────────────────────────────────────────────────────────────────
