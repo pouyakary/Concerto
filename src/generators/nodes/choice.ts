@@ -19,26 +19,33 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeGroup ):
+    export function generate ( node: blueprints.regulex.INodeChoice ):
                                      blueprints.block.IIntermediateNode {
 
-        let children = compiler.compile( node.sub )
+        let children = new Array<blueprints.block.IBlock> ( )
+        for ( let branch of node.branches )
+            children.push( composeOptionBlock( branch ) )
 
-        if ( node.nonCapture === true )
-            return {
-                type: 'group',
-                node: node,
-                value: children
-            }
-        else
-            return {
-                type: 'block',
-                node: node,
-                value: [{
-                    type: 'match',
-                    children: [ genkit.generateStatement( children ) ]
-                }]
-            }
-    }
+        return {
+            type: 'block',
+            node: node,
+            value: [{
+                type: 'one_of',
+                children: [
+                    genkit.generateStatement( children )
+                    ]}]}}
+
+//
+// ─── COMPOS CHOICE ──────────────────────────────────────────────────────────────
+//
+
+    function composeOptionBlock ( branch: blueprints.regulex.IBaseNode[ ] ):
+                                          blueprints.block.IBlock {
+        return {
+            type: 'option',
+            children: [
+                genkit.generateStatement(
+                    compiler.compile( branch )
+                )]}}
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -21,7 +21,7 @@
     export function generate ( node: blueprints.regulex.INodeSet ):
                                      blueprints.block.IIntermediateNode {
         return {
-            type: blueprints.block.IntermediateNodeType.Block,
+            type: 'block',
             node: node,
             value: [
                 switchForSetGenerator( node )

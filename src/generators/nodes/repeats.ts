@@ -53,11 +53,8 @@
         else result = composeRangeRepeat( min, max, block )
 
         // done
-        return {
-            type: blueprints.block.IntermediateNodeType.Block,
-            node: intermediateNode.node,
-            value: result
-        }
+        intermediateNode.value = result
+        return intermediateNode
     }
 
 //

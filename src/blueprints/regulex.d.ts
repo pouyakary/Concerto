@@ -78,7 +78,7 @@ declare module blueprints.regulex {
     //
 
         interface INodeChoice extends IBaseNode {
-            branches: IBaseNode[ ];
+            branches: IBaseNode[ ][ ];
         }
 
     //

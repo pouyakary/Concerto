@@ -15,7 +15,7 @@
     export function generate ( node: blueprints.regulex.INodeExact ):
                                      blueprints.block.IIntermediateNode {
         return {
-            type: blueprints.block.IntermediateNodeType.Block,
+            type: 'block',
             node: node,
             value: [{
                 type: 'encode',

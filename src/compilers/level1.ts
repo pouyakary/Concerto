@@ -19,6 +19,7 @@
     import * as exactNode   from '../generators/nodes/exact'
     import * as charsetNode from '../generators/nodes/charset'
     import * as groupNode   from '../generators/nodes/group'
+    import * as choiceNode  from '../generators/nodes/choice'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -29,7 +30,7 @@
         let ast = new Array<blueprints.block.IBlock> ( )
         for ( let node of tree ) {
             let intermediateNode =  handleOneNode( node )
-            if ( intermediateNode.type === blueprints.block.IntermediateNodeType.Block )
+            if ( intermediateNode.type === 'block' )
                 ast.push( intermediateNode.value[ 0 ] )
             else
                 ast.concat( intermediateNode.value )
@@ -49,18 +50,23 @@
         switch ( node.type ) {
             case 'exact':
                 intermediateNode =
-                    exactNode.generate(<blueprints.regulex.INodeExact> node )
-                break
+                    exactNode.generate( <blueprints.regulex.INodeExact> node )
+                    break
 
             case 'charset':
                 intermediateNode =
                     charsetNode.generate( <blueprints.regulex.INodeSet> node )
-                break
+                    break
 
             case 'group':
                 intermediateNode =
                     groupNode.generate( <blueprints.regulex.INodeGroup> node )
-                break
+                    break
+
+            case 'choice':
+                intermediateNode =
+                    choiceNode.generate( <blueprints.regulex.INodeChoice> node )
+                    break
             }
 
         // then we handle the repeat of the block
