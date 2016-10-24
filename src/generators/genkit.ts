@@ -13,12 +13,12 @@
 // ─── STATEMENT GENERATOR ────────────────────────────────────────────────────────
 //
 
-    export function generateStatement ( blocksOrBlocks: any, name = 'blocks' ):
-                                        blueprints.block.IStatement {
+    export function generateStatement ( blocks: blueprints.block.IBlock[ ],
+                                          name = 'blocks' ):
+                                                blueprints.block.IStatement {
         return {
             name: name,
-            children: ( blocksOrBlocks.constructor === Array )?
-                 blocksOrBlocks : [ blocksOrBlocks ]
+            children: blocks
         }
     }
 
