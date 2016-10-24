@@ -33,7 +33,8 @@
             if ( intermediateNode.type === 'block' )
                 ast.push( intermediateNode.value[ 0 ] )
             else
-                ast.concat( intermediateNode.value )
+                for ( let child of intermediateNode.value )
+                    ast.push( child )
         }
         return ast;
     }
