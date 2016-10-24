@@ -35,8 +35,15 @@
                                            blueprints.block.IBlock {
 
         // Simple Range
-        if ( node.ranges.length === 1 && node.chars === '' && node.exclude === undefined )
+        if ( node.ranges.length === 1 && node.chars === '' && node.exclude !== true )
             return composeRangeBlock( node.ranges[ 0 ] , 'range' )
+
+        // Special Character
+        if ( node.ranges.length === 0 &&
+             node.chars === '' &&
+             node.exclude !== true &&
+             node.classes.length === 1 )
+             return composeSpecialCharacterBlock( node )
 
         // Check if simple set
         let simpleSet = true
@@ -63,6 +70,28 @@
                 {  name: 'start', value: range[ 0 ] },
                 {  name: 'end', value: range[ 1 ] }
             ]
+        }
+    }
+
+//
+// ─── SPECIAL CHARACTER ──────────────────────────────────────────────────────────
+//
+
+    function composeSpecialCharacterBlock ( node: blueprints.regulex.INodeSet ):
+                                                  blueprints.block.IBlock {
+        let quartetBlocksForClasses = {
+            'w': 'word',
+            'W': 'anything_but_word',
+            'd': 'digit',
+            'D': 'anything_but_digit',
+            's': 'whitespace',
+            'S': 'anything_but_whitespace',
+            'b': 'boundary',
+            'B': 'anything_but_boundary'
+        }
+
+        return {
+            type: quartetBlocksForClasses[ node.classes[ 0 ] ]
         }
     }
 
