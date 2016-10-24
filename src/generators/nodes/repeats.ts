@@ -26,34 +26,37 @@
 
         let min     = intermediateNode.node.repeat.min
         let max     = intermediateNode.node.repeat.max
-        let block   = intermediateNode.value
-        let result
+        let blocks  = intermediateNode.value
+        let result  : blueprints.block.IBlock[ ]
 
         // Maybe block
         if ( min === 0 && max === 1 )
-            result = composeStaticRepeat( 'maybe', block )
+            result = composeStaticRepeat( 'maybe', blocks )
 
         // One or More
         else if ( min === 1 && max === Infinity )
-            result = composeStaticRepeat( 'one_or_more', block )
+            result = composeStaticRepeat( 'one_or_more', blocks )
 
         // Any number of
         else if ( min === 0 && max === Infinity )
-            result = composeStaticRepeat( 'any_number_of', block )
+            result = composeStaticRepeat( 'any_number_of', blocks )
 
         // Exact Repeat
         else if ( min === max )
-            result = composeExactRepeat( min, block )
+            result = composeExactRepeat( min, blocks )
 
         // At least repeat
         else if ( max === Infinity )
-            result = composeAtLeastRepeat( min, block )
+            result = composeAtLeastRepeat( min, blocks )
 
         // Range Repeat
-        else result = composeRangeRepeat( min, max, block )
+        else result = composeRangeRepeat( min, max, blocks )
 
         // done
         intermediateNode.value = result
+
+        console.log( `---> ${ intermediateNode }` )
+
         return intermediateNode
     }
 
@@ -62,47 +65,47 @@
 //
 
     function composeStaticRepeat ( repeatType: string,
-                                blockOrBlocks: blueprints.block.IBlock[ ] ):
-                                               blueprints.block.IBlock {
-        return {
+                                       blocks: blueprints.block.IBlock[ ] ):
+                                               blueprints.block.IBlock[ ] {
+        return [{
             type: repeatType,
             children: [
-                genkit.generateStatement( blockOrBlocks )
-            ]}}
+                genkit.generateStatement( blocks )
+            ]}}]
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
 //
 
     function composeExactRepeat ( count: number,
-                          blockOrBlocks: blueprints.block.IBlock[ ] ):
-                                         blueprints.block.IBlock {
-        return {
+                                 blocks: blueprints.block.IBlock[ ] ):
+                                         blueprints.block.IBlock[ ] {
+        return [{
             type: 'repeat',
             fields: [{
                 name: 'count',
                 value: count.toString( )
             }],
             children: [
-                genkit.generateStatement( blockOrBlocks )
-            ]}}
+                genkit.generateStatement( blocks )
+            ]}]}
 
 //
 // ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
 //
 
     function composeAtLeastRepeat ( min: number,
-                          blockOrBlocks: blueprints.block.IBlock[ ] ):
-                                         blueprints.block.IBlock {
-        return {
+                                 blocks: blueprints.block.IBlock[ ] ):
+                                         blueprints.block.IBlock[ ] {
+        return [{
             type: 'repeat_at_least',
             fields: [{
                 name: 'count',
                 value: min.toString( )
             }],
             children: [
-                genkit.generateStatement( blockOrBlocks )
-            ]}}
+                genkit.generateStatement( blocks )
+            ]}]}
 
 //
 // ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
@@ -110,16 +113,16 @@
 
     function composeRangeRepeat ( min: number,
                                   max: number,
-                        blockOrBlocks: blueprints.block.IBlock[ ] ):
-                                       blueprints.block.IBlock {
-        return {
+                               blocks: blueprints.block.IBlock[ ] ):
+                                       blueprints.block.IBlock[ ] {
+        return [{
             type: 'repeat_in_range',
             fields: [
                 { name: 'start', value: min.toString( ) },
                 { name: 'end',   value: max.toString( ) },
             ],
             children: [
-                genkit.generateStatement( blockOrBlocks )
-            ]}}
+                genkit.generateStatement( blocks )
+            ]}]}
 
 // ────────────────────────────────────────────────────────────────────────────────
