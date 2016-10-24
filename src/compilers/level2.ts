@@ -15,6 +15,8 @@
     export function compile ( concertoAST: blueprints.block.IBlock[ ] ):
                                            blueprints.recarr.INode {
 
+        if ( concertoAST.length === 0 ) return null
+
         let firstIndex = concertoAST[ 0 ]
         let children = new Array<blueprints.recarr.IStatement> ( )
 
