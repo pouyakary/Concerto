@@ -13,13 +13,14 @@
 //
 
     // tools
-    import * as repeats     from '../generators/nodes/repeats';
+    import * as repeats         from '../generators/nodes/repeats';
 
     // nodes
-    import * as exactNode   from '../generators/nodes/exact'
-    import * as charsetNode from '../generators/nodes/charset'
-    import * as groupNode   from '../generators/nodes/group'
-    import * as choiceNode  from '../generators/nodes/choice'
+    import * as exactNode       from '../generators/nodes/exact'
+    import * as charsetNode     from '../generators/nodes/charset'
+    import * as groupNode       from '../generators/nodes/group'
+    import * as choiceNode      from '../generators/nodes/choice'
+    import * as lookaheadNode   from '../generators/nodes/lookahead'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -29,14 +30,15 @@
     export function compile ( tree: blueprints.regulex.IBaseNode[ ] ) {
         let ast = new Array<blueprints.block.IBlock> ( )
         for ( let node of tree ) {
-            let intermediateNode =  handleOneNode( node )
-            if ( intermediateNode.type === 'block' )
-                ast.push( intermediateNode.value[ 0 ] )
-            else
-                for ( let child of intermediateNode.value )
-                    ast.push( child )
-        }
-        return ast;
+            if ( node !== null ) {
+                let intermediateNode =  handleOneNode( node )
+                if ( intermediateNode.type === 'block' )
+                    ast.push( intermediateNode.value[ 0 ] )
+                else
+                    for ( let child of intermediateNode.value )
+                        ast.push( child )
+                    }}
+        return ast
     }
 
 //
@@ -67,6 +69,11 @@
             case 'choice':
                 intermediateNode =
                     choiceNode.generate( <blueprints.regulex.INodeChoice> node )
+                    break
+
+            case 'lookahead':
+                intermediateNode =
+                    lookaheadNode.generate( <blueprints.regulex.INodeLookahead> node )
                     break
             }
 

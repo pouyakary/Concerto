@@ -13,6 +13,7 @@
 //
 
     import * as regulex                     from 'regulex'
+    import * as preprocessor                from './compilers/level0'
     import * as regulexToConcertoCompiler   from './compilers/level1'
     import * as concertoToRecarrCompiler    from './compilers/level2'
     import * as recarrToQuartetXMLCompiler  from './compilers/level3'
@@ -36,8 +37,16 @@
             console.log( regulexAST )
         }
 
+
+        // running the preprocessor on the ast
+        let normalizedAST = preprocessor.fixLookahead( regulexAST )
+        if ( debug ) {
+            console.log('--- Normalized AST -----------------------')
+            console.log( normalizedAST )
+        }
+
         // first level compilation: Regulex AST to Concerto AST
-        let concertoAST = regulexToConcertoCompiler.compile( regulexAST.tree )
+        let concertoAST = regulexToConcertoCompiler.compile( normalizedAST.tree )
         if ( debug ) {
             console.log('--- Concerto AST -------------------------')
             console.log( concertoAST )
