@@ -21,6 +21,7 @@
     import * as groupNode       from '../generators/nodes/group'
     import * as choiceNode      from '../generators/nodes/choice'
     import * as lookaheadNode   from '../generators/nodes/lookahead'
+    import * as assertNode      from '../generators/nodes/assert'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -74,6 +75,11 @@
             case 'lookahead':
                 intermediateNode =
                     lookaheadNode.generate( <blueprints.regulex.INodeLookahead> node )
+                    break
+
+            case 'assert':
+                intermediateNode =
+                    assertNode.generate( <blueprints.regulex.INodeAssert> node )
                     break
             }
 
