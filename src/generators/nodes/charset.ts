@@ -35,15 +35,14 @@
                                            blueprints.block.IBlock {
 
         // Simple Range
-        if ( node.ranges.length === 1 && node.chars === '' && node.exclude !== true )
+        if ( node.ranges.length === 1 && node.chars === '' &&
+             node.exclude !== true && node.classes.length === 0 )
             return composeRangeBlock( node.ranges[ 0 ] , 'range' )
 
         // Special Character
-        if ( node.ranges.length === 0 &&
-             node.chars === '' &&
-             node.exclude !== true &&
-             node.classes.length === 1 )
-             return composeSpecialCharacterBlock( node )
+        if ( node.ranges.length === 0 && node.chars === '' &&
+             node.exclude !== true && node.classes.length === 1 )
+            return composeSpecialCharacterBlock( node )
 
         // Check if simple set
         let simpleSet = true
@@ -53,7 +52,7 @@
                     simpleSet = false
 
         // composing for simple set
-        if ( simpleSet ) return composeSimpleAlphabetBlock( node )
+        if ( simpleSet && node.classes.length === 0 ) return composeSimpleAlphabetBlock( node )
 
         // composing for advanced set
         return composeAdvancedSet( node )
@@ -69,9 +68,7 @@
             fields: [
                 {  name: 'start', value: range[ 0 ] },
                 {  name: 'end', value: range[ 1 ] }
-            ]
-        }
-    }
+            ]}}
 
 //
 // ─── SPECIAL CHARACTER ──────────────────────────────────────────────────────────
@@ -90,10 +87,16 @@
             'B': 'anything_but_boundary'
         }
 
-        return {
-            type: quartetBlocksForClasses[ node.classes[ 0 ] ]
-        }
-    }
+        let block = quartetBlocksForClasses[ node.classes[ 0 ] ]
+
+        if ( block !== undefined )
+            return { type: block }
+        else
+            return {
+                type: 'free_form_regex',
+                fields: [{
+                    name: 'regex', value: `\\\\${ node.classes[ 0 ] }`
+                }]}}
 
 //
 // ─── SIMPLE ALPHABET BLOCK ──────────────────────────────────────────────────────
@@ -129,9 +132,7 @@
                 { name: 'lowercase'  , value: sets.lowercase   },
                 { name: 'uppercase'  , value: sets.uppercase   },
                 { name: 'other'      , value: node.chars       },
-            ]
-        }
-    }
+            ]}}
 
 //
 // ─── ADVANCE SET ────────────────────────────────────────────────────────────────
@@ -152,8 +153,15 @@
                 type: 'sigma_chars',
                 fields: [{
                     name: 'text', value: node.chars
-                }]
-            })
+                }]})
+
+        // adding special characters
+        if ( node.classes.length > 0 ) {
+            children.push({
+                type: 'sigma_wildcard',
+                fields: [{
+                    name: 'escapes', value: node.classes.map( c => `\\\\${ c }` ).join('')
+                }]})}
 
         // returning...
         return {
