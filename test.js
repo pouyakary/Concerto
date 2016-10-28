@@ -1,8 +1,8 @@
 
 const concerto = require( './bin/index.js' )
 
-const xml = concerto.compile( 'a\\wb', true )
+const xml = concerto.compile( 'a(?!b)', true )
 
 console.log( '--- Quartet File -------------------------' )
-console.log( `{"workspaceXML":"${ xml }","playgroundText":""}` )
 
+console.log( `{"workspaceXML":"${ xml }","playgroundText":""}` )

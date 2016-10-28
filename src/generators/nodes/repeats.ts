@@ -71,7 +71,7 @@
             type: repeatType,
             children: [
                 genkit.generateStatement( blocks )
-            ]}}]
+            ]}]}
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
