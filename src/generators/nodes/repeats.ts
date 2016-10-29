@@ -55,8 +55,6 @@
         // done
         intermediateNode.value = result
 
-        console.log( `---> ${ intermediateNode }` )
-
         return intermediateNode
     }
 
