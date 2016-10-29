@@ -12,7 +12,6 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as regulex                     from 'regulex'
     import * as preprocessor                from './compilers/level0'
     import * as regulexToConcertoCompiler   from './compilers/level1'
     import * as concertoToRecarrCompiler    from './compilers/level2'
@@ -22,21 +21,7 @@
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
-    export function compile ( text: string, debug = false ) {
-        // testing the regex we already have:
-        let regulexAST: blueprints.regulex.IRegExAST
-        try {
-            regulexAST = regulex.parse( text )
-        }
-        catch ( error ) {
-            throw error
-        }
-
-        if ( debug ) {
-            console.log('--- Regulex AST --------------------------')
-            console.log( regulexAST )
-        }
-
+    export function compile ( regulexAST: blueprints.regulex.IRegExAST, debug = false ) {
 
         // running the preprocessor on the ast
         let normalizedAST = preprocessor.fixLookahead( regulexAST )
