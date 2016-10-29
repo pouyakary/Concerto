@@ -5,6 +5,7 @@
         "outDir": "bin",
         "noImplicitAny": false,
         "removeComments": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "declaration": true
     }
 }

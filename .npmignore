@@ -3,7 +3,7 @@ node_modules/**
 .vscode/**
 src/**
 tsconfig.json
-bin/blueprints/**
+bin/blueprints/.*.js
 .*.js.map
 test.js
 README.md
