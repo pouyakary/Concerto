@@ -4,3 +4,4 @@ node_modules/**
 src/**
 tsconfig.json
 bin/blueprints/**
+.*.js.map
