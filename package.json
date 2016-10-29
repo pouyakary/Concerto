@@ -1,6 +1,6 @@
 {
-  "name": "concertojs",
-  "version": "0.0.1",
+  "name": "concerto-compiler",
+  "version": "0.1.0",
   "description": "A compiler to compile RegEx into Quartet Language's Block XML",
   "main": "bin/index.js",
   "scripts": {
