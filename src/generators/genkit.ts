@@ -42,6 +42,9 @@
                     result.push( '\\/' )
                     break
 
+                case '&':
+                    result.push( '&amp;' )
+
                 default:
                     result.push( char )
             }

@@ -5,8 +5,8 @@ const regulex = require( 'regulex' )
 // testing the regex we already have:
 let regulexAST
 try {
-    regulexAST = regulex.parse( '<span class="console-highlight-active-block">(.*)</span>' )
-    console.log('--- Regulex AST --------------------------')
+    regulexAST = regulex.parse( '&(?:gt|rt);' )
+    console.log( '--- Regulex AST --------------------------' )
     console.log( regulexAST )
 }
 catch ( error ) {
