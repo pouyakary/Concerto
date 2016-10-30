@@ -22,4 +22,31 @@
         }
     }
 
+//
+// ─── TEXT ENCODER ───────────────────────────────────────────────────────────────
+//
+
+    export function encodeText ( text: string ): string {
+        let result = [ ]
+        for ( let char of text ) {
+            switch ( char ) {
+                case '<':
+                    result.push( '&lt;' )
+                    break
+
+                case '>':
+                    result.push( '&gt;' )
+                    break
+
+                case '/':
+                    result.push( '\\/' )
+                    break
+
+                default:
+                    result.push( char )
+            }
+        }
+        return result.join('')
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────

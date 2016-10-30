@@ -22,6 +22,7 @@
     import * as choiceNode      from '../generators/nodes/choice'
     import * as lookaheadNode   from '../generators/nodes/lookahead'
     import * as assertNode      from '../generators/nodes/assert'
+    import * as dotNode         from '../generators/nodes/dot'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -70,6 +71,11 @@
             case 'choice':
                 intermediateNode =
                     choiceNode.generate( <blueprints.regulex.INodeChoice> node )
+                    break
+
+            case 'dot':
+                intermediateNode =
+                    dotNode.generate( node )
                     break
 
             case 'lookahead':

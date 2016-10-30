@@ -66,8 +66,8 @@
         return {
             type: kind,
             fields: [
-                {  name: 'start', value: range[ 0 ] },
-                {  name: 'end', value: range[ 1 ] }
+                {  name: 'start', value: genkit.encodeText( range[ 0 ] ) },
+                {  name: 'end', value: genkit.encodeText( range[ 1 ] ) }
             ]}}
 
 //
@@ -128,10 +128,10 @@
         return {
             type: ( node.exclude )? 'anything_but': 'alphabet',
             fields:[
-                { name: 'numbers'    , value: sets.numbers     },
-                { name: 'lowercase'  , value: sets.lowercase   },
-                { name: 'uppercase'  , value: sets.uppercase   },
-                { name: 'other'      , value: node.chars       },
+                { name: 'numbers'    , value: sets.numbers                      },
+                { name: 'lowercase'  , value: sets.lowercase                    },
+                { name: 'uppercase'  , value: sets.uppercase                    },
+                { name: 'other'      , value: genkit.encodeText( node.chars )   },
             ]}}
 
 //
@@ -152,7 +152,7 @@
             children.push({
                 type: 'sigma_chars',
                 fields: [{
-                    name: 'text', value: node.chars
+                    name: 'text', value: genkit.encodeText( node.chars )
                 }]})
 
         // adding special characters

@@ -1,18 +1,16 @@
 
 const concerto = require( './bin/index.js' )
+const regulex = require( 'regulex' )
 
 // testing the regex we already have:
 let regulexAST
 try {
-    regulexAST = regulex.parse( 'a(?!b)\\b' )
+    regulexAST = regulex.parse( '<span class="console-highlight-active-block">(.*)</span>' )
+    console.log('--- Regulex AST --------------------------')
+    console.log( regulexAST )
 }
 catch ( error ) {
     throw error
-}
-
-if ( debug ) {
-    console.log('--- Regulex AST --------------------------')
-    console.log( regulexAST )
 }
 
 const xml = concerto.compile( regulexAST, true )
