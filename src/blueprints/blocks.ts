@@ -48,7 +48,7 @@ module blueprints.block {
     //
 
         export interface IIntermediateNode {
-            type: string;
+            type: "block" | "group";
             node: blueprints.regulex.IBaseNode;
             value: IBlock[ ]
         }
