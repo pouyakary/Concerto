@@ -12,50 +12,69 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
+    import * as k from '../../libs/k'
     import * as genkit from '../genkit'
-
-//
-// ─── EXPORT ─────────────────────────────────────────────────────────────────────
-//
-
-    export function generate ( node: blueprints.regulex.INodeSet ):
-                                     blueprints.block.IIntermediateNode {
-        return {
-            type: 'block',
-            node: node,
-            value: [
-                switchForSetGenerator( node )
-        ]}}
+    import * as whitespace from './whitespace'
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    function switchForSetGenerator ( node: blueprints.regulex.INodeSet ):
-                                           blueprints.block.IBlock {
+    export function generate ( node: blueprints.regulex.INodeSet ):
+                              blueprints.block.IIntermediateNode {
 
         // Simple Range
         if ( node.ranges.length === 1 && node.chars === '' &&
              node.exclude !== true && node.classes.length === 0 )
-            return composeRangeBlock( node.ranges[ 0 ] , 'range' )
+            return {
+                type: 'block',
+                node: node,
+                value: [
+                    composeRangeBlock( node.ranges[ 0 ] , 'range' )
+                ]}
 
         // Special Character
         if ( node.ranges.length === 0 && node.chars === '' &&
              node.exclude !== true && node.classes.length === 1 )
-            return composeSpecialCharacterBlock( node )
+            return {
+                type: 'block',
+                node: node,
+                value: [
+                    composeSpecialCharacterBlock( node )
+                ]}
+
+
+        // Whitespace range
+        if ( node.classes.length === 0 && node.ranges.length === 0 &&
+             /^(?:\\[tn]| )+$/.test( node.chars ) ) {
+            let spaces = [ ];
+            for ( let space of [ '\\t', '\\n', ' ' ] )
+                if ( ( new RegExp( space ) ).test( node.chars ) )
+                    spaces.push( space )
+            return whitespace.handleWhitespace( spaces, node )
+        }
 
         // Check if simple set
-        let simpleSet = true
-        if ( node.ranges !== undefined )
-            for ( let range of node.ranges )
-                if ( !( range === 'az' || range === 'AZ' || range === '09' ) )
-                    simpleSet = false
+        let simpleSet = k.isSubset( node.ranges, ['az', 'AZ', '09'] )
+        if ( simpleSet && node.classes.length === 0 )
+            if ( /^[\n\t ]+$/gm.test( node.chars ) )
+                return whitespace.handleWhitespace( node.chars.split('') , node )
+            else
+                return {
+                    type: 'block',
+                    node: node,
+                    value: [
+                        composeSimpleAlphabetBlock( node )
+                    ]}
 
-        // composing for simple set
-        if ( simpleSet && node.classes.length === 0 ) return composeSimpleAlphabetBlock( node )
 
         // composing for advanced set
-        return composeAdvancedSet( node )
+        return {
+            type: 'block',
+            node: node,
+            value: [
+                    composeAdvancedSet( node )
+            ]}
     }
 
 //
