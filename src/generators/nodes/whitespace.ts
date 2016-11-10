@@ -21,30 +21,17 @@
     export function handleWhitespace ( spaces: string[ ],
                                          node: blueprints.regulex.INodeExact ):
                                                blueprints.block.IIntermediateNode {
-
-        let settings = {
-            space: false,
-            tab: false,
-            linefeed: false,
-        }
-
-        if ( isMember( '\t', spaces ) )
-            settings.tab = true
-
-        if ( isMember( ' ', spaces ) )
-            settings.space = true
-
-        if ( isMember( '\n', spaces ) )
-            settings.linefeed = true
-
         return {
             type: 'block',
             node: node,
             value: [{
                 type: 'whitespace',
-                fields: generateFieldsArray( settings )
-            }]}
-    }
+                fields: generateFieldsArray({
+                    space: isMember( ' ', spaces ),
+                    tab: isMember( '\t', spaces ),
+                    linefeed: isMember( '\n', spaces ),
+                })
+            }]}}
 
 //
 // ─── IS SUBSET ──────────────────────────────────────────────────────────────────
@@ -63,12 +50,11 @@
 
     function generateFieldsArray ( spaces: Object ): blueprints.block.IField[ ] {
         let results = new Array<blueprints.block.IField> ( )
-        for ( let space of Object.keys( spaces ) ) {
+        for ( let space of Object.keys( spaces ) )
             results.push({
                 name: space,
                 value: ( spaces[ space ] )? 'TRUE' : 'FALSE'
             })
-        }
         return results;
     }
 
