@@ -44,6 +44,7 @@
 
                 case '&':
                     result.push( '&amp;' )
+                    break
 
                 default:
                     result.push( char )
