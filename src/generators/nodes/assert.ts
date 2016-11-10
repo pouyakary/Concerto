@@ -9,6 +9,12 @@
 //
 
 //
+// ─── IMPORT ─────────────────────────────────────────────────────────────────────
+//
+
+    import * as genkit from '../genkit'
+
+//
 // ─── EXPORT ─────────────────────────────────────────────────────────────────────
 //
 
@@ -29,6 +35,22 @@
                 node: node,
                 value: [{
                     type: 'anything_but_boundary'
+                }]}
+
+        if ( node.assertionType === 'AssertEnd' )
+            return {
+                type: 'block',
+                node: node,
+                value: [{
+                    type: 'line_end'
+                }]}
+
+        if ( node.assertionType === 'AssertBegin' )
+            return {
+                type: 'block',
+                node: node,
+                value: [{
+                    type: 'line_start'
                 }]}
     }
 
