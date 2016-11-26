@@ -6,6 +6,7 @@
         "noImplicitAny": false,
         "removeComments": true,
         "sourceMap": true,
+        "strictNullChecks": true,
         "declaration": true
     }
 }
