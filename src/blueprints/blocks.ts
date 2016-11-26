@@ -50,7 +50,7 @@ module blueprints.block {
         export interface IIntermediateNode {
             type: "block" | "group";
             node: blueprints.regulex.IBaseNode;
-            value: IBlock[ ]
+            value: IBlock[ ];
         }
 
     // ────────────────────────────────────────────────────────────────────────────────
