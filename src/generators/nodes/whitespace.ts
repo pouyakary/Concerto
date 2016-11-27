@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit'
+    import * as genkit from '../genkit';
 
 //
 // ─── HANDLE WHITESPACE ──────────────────────────────────────────────────────────
@@ -31,7 +31,7 @@
                     tab: isMember( '\t', spaces ),
                     linefeed: isMember( '\n', spaces ),
                 })
-            }]}}
+            }]}};
 
 //
 // ─── IS SUBSET ──────────────────────────────────────────────────────────────────
@@ -40,8 +40,8 @@
     function isMember ( element: any, arr: any[ ] ) {
         for ( let member of arr )
             if ( member === element )
-                return true
-        return false
+                return true;
+        return false;
     }
 
 //
@@ -49,12 +49,12 @@
 //
 
     function generateFieldsArray ( spaces: Object ): blueprints.block.IField[ ] {
-        let results = new Array<blueprints.block.IField> ( )
+        let results = new Array<blueprints.block.IField> ( );
         for ( let space of Object.keys( spaces ) )
             results.push({
                 name: space,
                 value: ( spaces[ space ] )? 'TRUE' : 'FALSE'
-            })
+            });
         return results;
     }
 

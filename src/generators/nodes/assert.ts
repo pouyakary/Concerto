@@ -27,7 +27,7 @@
                 node: node,
                 value: [{
                     type: 'boundary'
-                }]}
+                }]};
 
         if ( node.assertionType === 'AssertNonWordBoundary' )
             return {
@@ -35,7 +35,7 @@
                 node: node,
                 value: [{
                     type: 'anything_but_boundary'
-                }]}
+                }]};
 
         if ( node.assertionType === 'AssertEnd' )
             return {
@@ -43,7 +43,7 @@
                 node: node,
                 value: [{
                     type: 'line_end'
-                }]}
+                }]};
 
         if ( node.assertionType === 'AssertBegin' )
             return {
@@ -51,7 +51,7 @@
                 node: node,
                 value: [{
                     type: 'line_start'
-                }]}
+                }]};
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

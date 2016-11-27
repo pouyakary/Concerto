@@ -19,7 +19,7 @@
         return {
             name: name,
             children: blocks
-        }
+        };
     }
 
 //
@@ -31,26 +31,27 @@
         for ( let char of text ) {
             switch ( char ) {
                 case '<':
-                    result.push( '&lt;' )
-                    break
+                    result.push( '&lt;' );
+                    break;
 
                 case '>':
-                    result.push( '&gt;' )
-                    break
+                    result.push( '&gt;' );
+                    break;
 
                 case '/':
-                    result.push( '\\/' )
-                    break
+                    result.push( '\\/' );
+                    break;
 
                 case '&':
-                    result.push( '&amp;' )
-                    break
+                    result.push( '&amp;' );
+                    break;
 
                 default:
-                    result.push( char )
+                    result.push( char );
             }
         }
-        return result.join('')
+
+        return result.join('');
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

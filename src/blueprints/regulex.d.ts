@@ -30,9 +30,9 @@ declare module blueprints.regulex {
 
 
         interface IRegExAST {
-            raw: string
-            tree: IBaseNode[ ]
-            groupCount: number
+            raw: string;
+            tree: Array<( IBaseNode | null )>;
+            groupCount: number;
         }
 
     //
@@ -46,12 +46,12 @@ declare module blueprints.regulex {
         //
 
         interface IBaseNode {
-            type: string
-            raw: string
+            type: string;
+            raw: string;
             repeat?: {
                 min: number,
                 max: number
-            }
+            };
         }
 
     //
@@ -59,7 +59,7 @@ declare module blueprints.regulex {
     //
 
         interface INodeExact extends IBaseNode {
-            chars: string
+            chars: string;
         }
 
     //
@@ -67,10 +67,10 @@ declare module blueprints.regulex {
     //
 
         interface INodeSet extends IBaseNode {
-            classes: any[ ]
-            ranges: string[ ]
-            chars: string
-            exclude?: boolean
+            classes: any[ ];
+            ranges: string[ ];
+            chars: string;
+            exclude?: boolean;
         }
 
     //
@@ -78,7 +78,7 @@ declare module blueprints.regulex {
     //
 
         interface INodeChoice extends IBaseNode {
-            branches: IBaseNode[ ][ ]
+            branches: IBaseNode[ ][ ];
         }
 
     //
@@ -86,8 +86,8 @@ declare module blueprints.regulex {
     //
 
         interface INodeGroup extends IBaseNode {
-            sub: IBaseNode[ ]
-            nonCapture?: boolean
+            sub: IBaseNode[ ];
+            nonCapture?: boolean;
         }
 
     //
@@ -95,8 +95,8 @@ declare module blueprints.regulex {
     //
 
         interface INodeAssert extends IBaseNode {
-            assertionType: string
-            sub: IBaseNode[ ]
+            assertionType: string;
+            sub: IBaseNode[ ];
         }
 
     //
@@ -104,8 +104,8 @@ declare module blueprints.regulex {
     //
 
         interface INodeLookahead extends INodeAssert {
-            statement: IBaseNode
-            status: boolean
+            statement: IBaseNode;
+            status: boolean;
         }
 
     // ────────────────────────────────────────────────────────────────────────────────

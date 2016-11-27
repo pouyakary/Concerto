@@ -55,42 +55,42 @@
         switch ( node.type ) {
             case 'exact':
                 intermediateNode =
-                    exactNode.generate( <blueprints.regulex.INodeExact> node )
-                    break
+                    exactNode.generate( <blueprints.regulex.INodeExact> node );
+                    break;
 
             case 'charset':
                 intermediateNode =
-                    charsetNode.generate( <blueprints.regulex.INodeSet> node )
-                    break
+                    charsetNode.generate( <blueprints.regulex.INodeSet> node );
+                    break;
 
             case 'group':
                 intermediateNode =
-                    groupNode.generate( <blueprints.regulex.INodeGroup> node )
-                    break
+                    groupNode.generate( <blueprints.regulex.INodeGroup> node );
+                    break;
 
             case 'choice':
                 intermediateNode =
-                    choiceNode.generate( <blueprints.regulex.INodeChoice> node )
-                    break
+                    choiceNode.generate( <blueprints.regulex.INodeChoice> node );
+                    break;
 
             case 'dot':
                 intermediateNode =
-                    dotNode.generate( node )
-                    break
+                    dotNode.generate( node );
+                    break;
 
             case 'lookahead':
                 intermediateNode =
-                    lookaheadNode.generate( <blueprints.regulex.INodeLookahead> node )
-                    break
+                    lookaheadNode.generate( <blueprints.regulex.INodeLookahead> node );
+                    break;
 
             case 'assert':
                 intermediateNode =
-                    assertNode.generate( <blueprints.regulex.INodeAssert> node )
-                    break
+                    assertNode.generate( <blueprints.regulex.INodeAssert> node );
+                    break;
             }
 
         // then we handle the repeat of the block
-        return repeats.generate( intermediateNode )
+        return repeats.generate( intermediateNode );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

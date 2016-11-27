@@ -5,7 +5,7 @@ const regulex = require( 'regulex' )
 // testing the regex we already have:
 let regulexAST
 try {
-    regulexAST = regulex.parse( '&(?:gt|rt);' )
+    regulexAST = regulex.parse( '[\\t\\n ]' )
     console.log( '--- Regulex AST --------------------------' )
     console.log( regulexAST )
 }

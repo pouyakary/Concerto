@@ -20,23 +20,23 @@
     export function fixLookahead ( ast: blueprints.regulex.IRegExAST ):
                                         blueprints.regulex.IRegExAST {
 
-        let topNode     : blueprints.regulex.IBaseNode
-        let bottomNode  : blueprints.regulex.INodeLookahead
+        let topNode     : blueprints.regulex.IBaseNode;
+        let bottomNode  : blueprints.regulex.INodeLookahead;
 
         for ( let counter = 0; counter < ast.tree.length - 1; counter++ ) {
-            topNode    = ast.tree[ counter ]
-            bottomNode = <blueprints.regulex.INodeLookahead> ast.tree[ counter + 1 ]
+            topNode    = ast.tree[ counter ];
+            bottomNode = <blueprints.regulex.INodeLookahead> ast.tree[ counter + 1 ];
 
             if ( bottomNode.type === 'assert' ) {
                 if ( bottomNode.assertionType === 'AssertLookahead' ||
                      bottomNode.assertionType === 'AssertNegativeLookahead' ) {
 
-                        bottomNode.type = 'lookahead'
-                        bottomNode.statement = Object.assign({ }, topNode )
+                        bottomNode.type = 'lookahead';
+                        bottomNode.statement = Object.assign({ }, topNode );
                         bottomNode.status = (
-                            bottomNode.assertionType === 'AssertLookahead' )
+                            bottomNode.assertionType === 'AssertLookahead' );
 
-                        ast.tree[ counter ] = null
+                        ast.tree[ counter ] = null;
                         counter++;
                      }}}
 

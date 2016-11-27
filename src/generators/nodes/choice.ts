@@ -12,8 +12,8 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as compiler from '../../compilers/level1'
-    import * as genkit   from '../genkit'
+    import * as compiler from '../../compilers/level1';
+    import * as genkit   from '../genkit';
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
@@ -22,9 +22,9 @@
     export function generate ( node: blueprints.regulex.INodeChoice ):
                                      blueprints.block.IIntermediateNode {
 
-        let children = new Array<blueprints.block.IBlock> ( )
+        let children = new Array<blueprints.block.IBlock> ( );
         for ( let branch of node.branches )
-            children.push( composeOptionBlock( branch ) )
+            children.push( composeOptionBlock( branch ) );
 
         return {
             type: 'block',
@@ -33,7 +33,7 @@
                 type: 'one_of',
                 children: [
                     genkit.generateStatement( children )
-                    ]}]}}
+                    ]}]}};
 
 //
 // ─── COMPOS CHOICE ──────────────────────────────────────────────────────────────
@@ -46,6 +46,6 @@
             children: [
                 genkit.generateStatement(
                     compiler.compile( branch )
-                )]}}
+                )]}};
 
 // ────────────────────────────────────────────────────────────────────────────────

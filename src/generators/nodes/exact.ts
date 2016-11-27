@@ -23,13 +23,13 @@
                                      blueprints.block.IIntermediateNode {
 
         if ( node.raw === ' ' )
-            return whitespaceNode.handleWhitespace( [ ' ' ], node )
+            return whitespaceNode.handleWhitespace( [ ' ' ], node );
 
         if ( node.raw === '\t' )
-            return whitespaceNode.handleWhitespace( [ '\t' ], node )
+            return whitespaceNode.handleWhitespace( [ '\t' ], node );
 
         if ( node.raw === '\n' )
-            return whitespaceNode.handleWhitespace( [ '\n' ], node )
+            return whitespaceNode.handleWhitespace( [ '\n' ], node );
 
         // else...
         return {
@@ -41,6 +41,6 @@
                     name: 'text',
                     value: genkit.encodeText( node.chars )
                 }]
-            }]}}
+            }]}};
 
 // ────────────────────────────────────────────────────────────────────────────────

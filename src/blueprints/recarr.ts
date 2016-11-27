@@ -15,10 +15,10 @@ module blueprints.recarr {
     //
 
         export interface INode {
-            type: string
-            fields?: blueprints.block.IField[ ]
-            statements?: IStatement[ ]
-            next?: INode
+            type: string;
+            fields?: blueprints.block.IField[ ];
+            statements?: IStatement[ ];
+            next?: INode;
         }
 
     //
@@ -26,8 +26,8 @@ module blueprints.recarr {
     //
 
         export interface IStatement {
-            name: string
-            block: INode
+            name: string;
+            block: INode;
         }
 
     // ────────────────────────────────────────────────────────────────────────────────

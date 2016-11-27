@@ -12,9 +12,9 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as k from '../../libs/k'
-    import * as genkit from '../genkit'
-    import * as whitespace from './whitespace'
+    import * as k from '../../libs/k';
+    import * as genkit from '../genkit';
+    import * as whitespace from './whitespace';
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
@@ -31,7 +31,7 @@
                 node: node,
                 value: [
                     composeRangeBlock( node.ranges[ 0 ] , 'range' )
-                ]}
+                ]};
 
         // Special Character
         if ( node.ranges.length === 0 && node.chars === '' &&
@@ -41,7 +41,7 @@
                 node: node,
                 value: [
                     composeSpecialCharacterBlock( node )
-                ]}
+                ]};
 
 
         // Whitespace range
@@ -50,22 +50,22 @@
             let spaces = [ ];
             for ( let space of [ '\\t', '\\n', ' ' ] )
                 if ( ( new RegExp( space ) ).test( node.chars ) )
-                    spaces.push( space )
-            return whitespace.handleWhitespace( spaces, node )
+                    spaces.push( space );
+            return whitespace.handleWhitespace( spaces, node );
         }
 
         // Check if simple set
-        let simpleSet = k.isSubset( node.ranges, ['az', 'AZ', '09'] )
+        let simpleSet = k.isSubset( node.ranges, ['az', 'AZ', '09'] );
         if ( simpleSet && node.classes.length === 0 )
             if ( /^[\n\t ]+$/gm.test( node.chars ) )
-                return whitespace.handleWhitespace( node.chars.split('') , node )
+                return whitespace.handleWhitespace( node.chars.split('') , node );
             else
                 return {
                     type: 'block',
                     node: node,
                     value: [
                         composeSimpleAlphabetBlock( node )
-                    ]}
+                    ]};
 
 
         // composing for advanced set
@@ -73,8 +73,8 @@
             type: 'block',
             node: node,
             value: [
-                    composeAdvancedSet( node )
-            ]}
+                composeAdvancedSet( node )
+            ]};
     }
 
 //
@@ -87,7 +87,7 @@
             fields: [
                 {  name: 'start', value: genkit.encodeText( range[ 0 ] ) },
                 {  name: 'end', value: genkit.encodeText( range[ 1 ] ) }
-            ]}}
+            ]}};
 
 //
 // ─── SPECIAL CHARACTER ──────────────────────────────────────────────────────────
@@ -104,18 +104,18 @@
             'S': 'anything_but_whitespace',
             'b': 'boundary',
             'B': 'anything_but_boundary'
-        }
+        };
 
-        let block = quartetBlocksForClasses[ node.classes[ 0 ] ]
+        let block = quartetBlocksForClasses[ node.classes[ 0 ] ];
 
         if ( block !== undefined )
-            return { type: block }
+            return { type: block };
         else
             return {
                 type: 'free_form_regex',
                 fields: [{
                     name: 'regex', value: `\\\\${ node.classes[ 0 ] }`
-                }]}}
+                }]}};
 
 //
 // ─── SIMPLE ALPHABET BLOCK ──────────────────────────────────────────────────────
@@ -128,19 +128,20 @@
             numbers: 'FALSE',
             lowercase: 'FALSE',
             uppercase: 'FALSE',
-        }
+        };
+
         if ( node.ranges !== undefined )
             for ( let range of node.ranges )
                 switch ( range ) {
                     case '09':
-                        sets.numbers = 'TRUE'
-                        break
+                        sets.numbers = 'TRUE';
+                        break;
                     case 'az':
-                        sets.lowercase = 'TRUE'
-                        break
+                        sets.lowercase = 'TRUE';
+                        break;
                     case 'AZ':
-                        sets.uppercase = 'TRUE'
-                        break
+                        sets.uppercase = 'TRUE';
+                        break;
                     }
 
         // composing final stuff:
@@ -151,7 +152,7 @@
                 { name: 'lowercase'  , value: sets.lowercase                    },
                 { name: 'uppercase'  , value: sets.uppercase                    },
                 { name: 'other'      , value: genkit.encodeText( node.chars )   },
-            ]}}
+            ]}};
 
 //
 // ─── ADVANCE SET ────────────────────────────────────────────────────────────────
@@ -164,7 +165,7 @@
 
         // adding ranges
         for ( let range of node.ranges )
-            children.push( composeRangeBlock( range, 'sigma_range' ) )
+            children.push( composeRangeBlock( range, 'sigma_range' ) );
 
         // adding other chars
         if ( node.chars !== '' && node.chars !== undefined )
@@ -172,7 +173,7 @@
                 type: 'sigma_chars',
                 fields: [{
                     name: 'text', value: genkit.encodeText( node.chars )
-                }]})
+                }]});
 
         // adding special characters
         if ( node.classes.length > 0 ) {
@@ -180,13 +181,13 @@
                 type: 'sigma_wildcard',
                 fields: [{
                     name: 'escapes', value: node.classes.map( c => `\\\\${ c }` ).join('')
-                }]})}
+                }]})};
 
         // returning...
         return {
             type: ( node.exclude )? 'exclude': 'sigma',
             children: [
                 genkit.generateStatement( children )
-            ]}}
+            ]}};
 
 // ────────────────────────────────────────────────────────────────────────────────

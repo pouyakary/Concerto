@@ -14,14 +14,14 @@
 
     export function isSubset ( a: any[ ], b: any[ ] ) {
         for ( let memberOfA of a ) {
-            let localResult = false
+            let localResult = false;
             for ( let memberOfB of b )
                 if ( b === memberOfA )
-                    localResult = true
+                    localResult = true;
             if ( !localResult )
-                return false
+                return false;
         }
-        return true
+        return true;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
