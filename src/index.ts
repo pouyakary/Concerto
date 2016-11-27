@@ -37,10 +37,10 @@
 
         // done!
         return quartetXML.replace( /\\"|"|\n/g, match => {
-            if ( match === '"' )
-                return '\\"';
             if ( match === '\n' )
                 return '';
+            else
+                return '\\"';
         });
     }
 

@@ -13,7 +13,9 @@
 //
 
     export function compile ( block: blueprints.recarr.INode ) {
-        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="blocks">${ generateBlockXML( block ) }</statement></block></xml>`
+        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="blocks">${
+            generateBlockXML( block )
+        }</statement></block></xml>`;
     }
 
 //
@@ -26,20 +28,20 @@
         // adding fields:
         if ( block.fields !== undefined && block.fields !== null )
             for ( let field of block.fields )
-                result.push( `<field name="${ field.name }">${ field.value }</field>` )
+                result.push( `<field name="${ field.name }">${ field.value }</field>` );
 
         // adding statements
         if ( block.statements !== undefined )
             for ( let statement of block.statements )
-                result.push( `<statement name="${ statement.name }">${ generateBlockXML( statement.block ) }</statement>`)
+                result.push( `<statement name="${ statement.name }">${ generateBlockXML( statement.block ) }</statement>`);
 
         // adding the next block
         if ( block.next !== null && block.next !== undefined )
-            result.push( `<next>${ generateBlockXML( block.next ) }</next>`)
+            result.push( `<next>${ generateBlockXML( block.next ) }</next>`);
 
         // done
-        result.push('</block>')
-        return result.join('')
+        result.push('</block>');
+        return result.join('');
     }
 
 //

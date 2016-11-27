@@ -12,14 +12,14 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit'
+    import * as genkit from '../genkit';
 
 //
 // ─── GENERATORS ─────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( intermediateNode: blueprints.block.IIntermediateNode ):
-                                                 blueprints.block.IIntermediateNode {
+    export function generate ( intermediateNode: blueprints.block.IIntermediateNode
+                                              ): blueprints.block.IIntermediateNode {
 
         // No Repeat
         if ( intermediateNode.node.repeat === undefined ) return intermediateNode
@@ -63,8 +63,8 @@
 //
 
     function composeStaticRepeat ( repeatType: string,
-                                       blocks: blueprints.block.IBlock[ ] ):
-                                               blueprints.block.IBlock[ ] {
+                                       blocks: blueprints.block.IBlock[ ]
+                                            ): blueprints.block.IBlock[ ] {
         return [{
             type: repeatType,
             children: [
@@ -76,8 +76,8 @@
 //
 
     function composeExactRepeat ( count: number,
-                                 blocks: blueprints.block.IBlock[ ] ):
-                                         blueprints.block.IBlock[ ] {
+                                 blocks: blueprints.block.IBlock[ ]
+                                      ): blueprints.block.IBlock[ ] {
         return [{
             type: 'repeat',
             fields: [{
@@ -93,8 +93,8 @@
 //
 
     function composeAtLeastRepeat ( min: number,
-                                 blocks: blueprints.block.IBlock[ ] ):
-                                         blueprints.block.IBlock[ ] {
+                                 blocks: blueprints.block.IBlock[ ]
+                                      ): blueprints.block.IBlock[ ] {
         return [{
             type: 'repeat_at_least',
             fields: [{
@@ -111,8 +111,8 @@
 
     function composeRangeRepeat ( min: number,
                                   max: number,
-                               blocks: blueprints.block.IBlock[ ] ):
-                                       blueprints.block.IBlock[ ] {
+                               blocks: blueprints.block.IBlock[ ]
+                                    ): blueprints.block.IBlock[ ] {
         return [{
             type: 'repeat_in_range',
             fields: [

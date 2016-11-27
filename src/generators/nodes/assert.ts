@@ -12,14 +12,14 @@
 // ─── IMPORT ─────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit'
+    import * as genkit from '../genkit';
 
 //
 // ─── EXPORT ─────────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeAssert ):
-                                     blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeAssert
+                                  ): blueprints.block.IIntermediateNode {
 
         if ( node.assertionType === 'AssertWordBoundary' )
             return {
@@ -52,6 +52,8 @@
                 value: [{
                     type: 'line_start'
                 }]};
+
+        throw 'Undefined node found.';
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

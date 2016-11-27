@@ -14,8 +14,7 @@
 //
 
     export function generateStatement ( blocks: blueprints.block.IBlock[ ],
-                                          name = 'blocks' ):
-                                                blueprints.block.IStatement {
+                                          name = 'blocks' ): blueprints.block.IStatement {
         return {
             name: name,
             children: blocks
@@ -27,7 +26,7 @@
 //
 
     export function encodeText ( text: string ): string {
-        let result = [ ]
+        let result = new Array<string>( );
         for ( let char of text ) {
             switch ( char ) {
                 case '<':

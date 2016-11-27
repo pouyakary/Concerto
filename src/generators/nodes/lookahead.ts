@@ -18,8 +18,8 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeLookahead ):
-                                     blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeLookahead
+                                  ): blueprints.block.IIntermediateNode {
 
         return {
             type: 'block',

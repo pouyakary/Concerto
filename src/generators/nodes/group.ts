@@ -19,8 +19,8 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeGroup ):
-                                     blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeGroup
+                                  ): blueprints.block.IIntermediateNode {
 
         let children = compiler.compile( node.sub );
 

@@ -19,8 +19,8 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeExact ):
-                                     blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeExact
+                                  ): blueprints.block.IIntermediateNode {
 
         if ( node.raw === ' ' )
             return whitespaceNode.handleWhitespace( [ ' ' ], node );

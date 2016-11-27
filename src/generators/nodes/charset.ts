@@ -20,8 +20,8 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeSet ):
-                              blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeSet
+                                  ): blueprints.block.IIntermediateNode {
 
         // Simple Range
         if ( node.ranges.length === 1 && node.chars === '' &&
@@ -47,7 +47,7 @@
         // Whitespace range
         if ( node.classes.length === 0 && node.ranges.length === 0 &&
              /^(?:\\[tn]| )+$/.test( node.chars ) ) {
-            let spaces = [ ];
+            let spaces = new Array<string>( );
             for ( let space of [ '\\t', '\\n', ' ' ] )
                 if ( ( new RegExp( space ) ).test( node.chars ) )
                     spaces.push( space );
@@ -93,8 +93,8 @@
 // ─── SPECIAL CHARACTER ──────────────────────────────────────────────────────────
 //
 
-    function composeSpecialCharacterBlock ( node: blueprints.regulex.INodeSet ):
-                                                  blueprints.block.IBlock {
+    function composeSpecialCharacterBlock ( node: blueprints.regulex.INodeSet
+                                               ): blueprints.block.IBlock {
         let quartetBlocksForClasses = {
             'w': 'word',
             'W': 'anything_but_word',
@@ -121,8 +121,8 @@
 // ─── SIMPLE ALPHABET BLOCK ──────────────────────────────────────────────────────
 //
 
-    function composeSimpleAlphabetBlock ( node: blueprints.regulex.INodeSet ):
-                                                blueprints.block.IBlock {
+    function composeSimpleAlphabetBlock ( node: blueprints.regulex.INodeSet
+                                             ): blueprints.block.IBlock {
         // fill ranges fields
         let sets = {
             numbers: 'FALSE',
@@ -158,8 +158,8 @@
 // ─── ADVANCE SET ────────────────────────────────────────────────────────────────
 //
 
-    function composeAdvancedSet ( node: blueprints.regulex.INodeSet ):
-                                        blueprints.block.IBlock {
+    function composeAdvancedSet ( node: blueprints.regulex.INodeSet
+                                     ): blueprints.block.IBlock {
 
         let children = new Array<blueprints.block.IBlock>( );
 

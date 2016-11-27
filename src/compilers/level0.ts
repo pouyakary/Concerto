@@ -17,17 +17,17 @@
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
-    export function fixLookahead ( ast: blueprints.regulex.IRegExAST ):
-                                        blueprints.regulex.IRegExAST {
+    export function fixLookahead ( ast: blueprints.regulex.IRegExAST
+                                 ): blueprints.regulex.IRegExAST {
 
-        let topNode     : blueprints.regulex.IBaseNode;
-        let bottomNode  : blueprints.regulex.INodeLookahead;
+        let topNode: blueprints.regulex.IBaseNode | null;
+        let bottomNode: blueprints.regulex.INodeLookahead;
 
         for ( let counter = 0; counter < ast.tree.length - 1; counter++ ) {
-            topNode    = ast.tree[ counter ];
-            bottomNode = <blueprints.regulex.INodeLookahead> ast.tree[ counter + 1 ];
+            topNode = ast.tree[ counter ];
+            bottomNode = ast.tree[ counter + 1 ] as blueprints.regulex.INodeLookahead;
 
-            if ( bottomNode.type === 'assert' ) {
+            if ( bottomNode.type === 'assert' && topNode ) {
                 if ( bottomNode.assertionType === 'AssertLookahead' ||
                      bottomNode.assertionType === 'AssertNegativeLookahead' ) {
 
@@ -38,9 +38,9 @@
 
                         ast.tree[ counter ] = null;
                         counter++;
-                     }}}
+                     }}};
 
-        return ast
+        return ast;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

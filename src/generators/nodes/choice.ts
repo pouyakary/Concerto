@@ -19,8 +19,8 @@
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeChoice ):
-                                     blueprints.block.IIntermediateNode {
+    export function generate ( node: blueprints.regulex.INodeChoice
+                                  ): blueprints.block.IIntermediateNode {
 
         let children = new Array<blueprints.block.IBlock> ( );
         for ( let branch of node.branches )
@@ -39,8 +39,8 @@
 // ─── COMPOS CHOICE ──────────────────────────────────────────────────────────────
 //
 
-    function composeOptionBlock ( branch: blueprints.regulex.IBaseNode[ ] ):
-                                          blueprints.block.IBlock {
+    function composeOptionBlock ( branch: blueprints.regulex.IBaseNode[ ]
+                                       ): blueprints.block.IBlock {
         return {
             type: 'option',
             children: [

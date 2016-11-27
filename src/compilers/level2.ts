@@ -12,8 +12,8 @@
 // ─── STARTING ADDER ─────────────────────────────────────────────────────────────
 //
 
-    export function compile ( concertoAST: blueprints.block.IBlock[ ] ):
-                                           blueprints.recarr.INode {
+    export function compile ( concertoAST: blueprints.block.IBlock[ ]
+                                        ): blueprints.recarr.INode {
 
         if ( concertoAST.length === 0 )
             throw 'Found ast with no length';
