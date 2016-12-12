@@ -95,7 +95,7 @@
 
     function composeSpecialCharacterBlock ( node: blueprints.regulex.INodeSet
                                                ): blueprints.block.IBlock {
-        let quartetBlocksForClasses = {
+        let orchestraBlocksForClasses = {
             'w': 'word',
             'W': 'anything_but_word',
             'd': 'digit',
@@ -106,7 +106,7 @@
             'B': 'anything_but_boundary'
         };
 
-        let block = quartetBlocksForClasses[ node.classes[ 0 ] ];
+        let block = orchestraBlocksForClasses[ node.classes[ 0 ] ];
 
         if ( block !== undefined )
             return { type: block };

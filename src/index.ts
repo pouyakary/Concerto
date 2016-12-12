@@ -33,10 +33,10 @@
         let recarrAST = concertoToRecarrCompiler.compile( concertoAST );
 
         // at the end we compile the recursive array into the Quartet XML
-        let quartetXML = recarrToQuartetXMLCompiler.compile( recarrAST );
+        let orchestraXML = recarrToQuartetXMLCompiler.compile( recarrAST );
 
         // done!
-        return quartetXML.replace( /\\"|"|\n/g, match => {
+        return orchestraXML.replace( /\\"|"|\n/g, match => {
             if ( match === '\n' )
                 return '';
             else
