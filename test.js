@@ -26,6 +26,6 @@ const xml = concerto.compile( regulexAST, false )
 //console.log( `{"workspaceXML":"${ xml }","playgroundText":""}` )
 
 fs.writeFileSync(
-    path.join( getDesktop( ), 'a.quartet' ), `{"workspaceXML":"${ xml }","playgroundText":""}`)
+    path.join( getDesktop( ), 'a.orchestra' ), `{"workspaceXML":"${ xml }","playgroundText":""}`)
 
-console.log('Test RegExp compiled and saved as "a.quartet" on desktop.')
+console.log('Test RegExp compiled and saved as "a.orchestra" on desktop.')
