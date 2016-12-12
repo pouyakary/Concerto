@@ -22,14 +22,16 @@
     export function generate ( node: blueprints.regulex.INodeExact
                                   ): blueprints.block.IIntermediateNode {
 
-        if ( node.raw === ' ' )
-            return whitespaceNode.handleWhitespace( [ ' ' ], node );
-
-        if ( node.raw === '\t' )
-            return whitespaceNode.handleWhitespace( [ '\t' ], node );
-
-        if ( node.raw === '\n' )
-            return whitespaceNode.handleWhitespace( [ '\n' ], node );
+        if ( node.chars.length === 1 ) {
+            switch ( node.chars.charCodeAt( 0 ) ) {
+                case 32:
+                    return whitespaceNode.handleWhitespace( [ ' ' ], node );
+                case 9:
+                    return whitespaceNode.handleWhitespace( [ '\t' ], node );
+                case 10:
+                    return whitespaceNode.handleWhitespace( [ '\n' ], node );
+            }
+        }
 
         // else...
         return {
