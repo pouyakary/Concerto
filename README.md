@@ -5,4 +5,6 @@
     <img src="http://www.karyfoundation.org/foundation/logo/github-full-horse.png" width="250" style="margin-top: 20px;">
   </a>
 </p>
-<br><br>
+<br><br><br><br><br><br>
+<hr>
+<b>NOTE</b><br> Concerto Compiler is a part of the <a href="https://github.com/karyfoundation/orchestra">Orchestra Project</a> and therefore to fill issues please [create new issues within the main Orchestra repository](https://github.com/karyfoundation/orchestra/issues/new) with this title template: <code>Concerto: Issue Title</code>.
