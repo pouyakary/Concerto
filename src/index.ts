@@ -51,8 +51,11 @@
         // done
         return {
             version: 1.0,
-            esTarget: 'es6',
-            flags: [ 'g' ],
+            compilerOptions: {
+                target: 'es6',
+                format: 'regexp',
+                flags: [],
+            },
             workspaceXML: orchestraXML,
             playgroundText: ''
         }
