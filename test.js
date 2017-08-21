@@ -19,13 +19,15 @@ catch ( error ) {
     throw error
 }
 
-const xml = concerto.compile( regulexAST, false )
+const xml = concerto.compile( regulexAST )
 
 ////console.log( '--- Quartet File -------------------------' )
 
 //console.log( `{"workspaceXML":"${ xml }","playgroundText":""}` )
 
 fs.writeFileSync(
-    path.join( getDesktop( ), 'a.orchestra' ), `{"workspaceXML":"${ xml }","playgroundText":""}`)
+    path.join( getDesktop( ), 'a.orchestra' ), `{"version":"1.0","workspaceXML":"${ xml }","flags":"gm","playgroundText":""}`)
 
 console.log('Test RegExp compiled and saved as "a.orchestra" on desktop.')
+
+{ }
