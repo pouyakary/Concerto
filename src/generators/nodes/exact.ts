@@ -22,16 +22,18 @@
     export function generate ( node: blueprints.regulex.INodeExact
                                   ): blueprints.block.IIntermediateNode {
 
+        console.log( node )
+
+        // special space characters
         if ( node.chars.length === 1 ) {
             switch ( node.chars.charCodeAt( 0 ) ) {
                 case 32:
-                    return whitespaceNode.handleWhitespace( [ ' ' ], node );
+                    return whitespaceNode.handleWhitespace( [ ' '  ], node )
                 case 9:
-                    return whitespaceNode.handleWhitespace( [ '\t' ], node );
+                    return whitespaceNode.handleWhitespace( [ '\t' ], node )
                 case 10:
-                    return whitespaceNode.handleWhitespace( [ '\n' ], node );
-            }
-        }
+                    return whitespaceNode.handleWhitespace( [ '\n' ], node )
+            }}
 
         // else...
         return {
@@ -43,6 +45,8 @@
                     name: 'text',
                     value: genkit.encodeText( node.chars )
                 }]
-            }]}};
+            }]
+        }
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

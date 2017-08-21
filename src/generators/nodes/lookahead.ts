@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as compiler from '../../compilers/level1';
+    import * as compiler from '../../compilers/level1'
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
@@ -26,19 +26,19 @@
             node: node,
             value: [{
                 type: 'lookahead',
-                children: [
-                    {
-                        name: 'blocks',
-                        children: compiler.compile([ node.statement ])
-                    },
-                    {
-                        name: 'lookahead',
-                        children: compiler.compile( node.sub )
-                    }
-                ],
+                children: [{
+                    name: 'blocks',
+                    children: compiler.compile([ node.statement ])
+                }, {
+                    name: 'lookahead',
+                    children: compiler.compile( node.sub )
+                }],
                 fields: [{
                     name: 'status',
                     value: ( node.status )? 'positive' : 'negative'
-        }]}]}};
+                }]
+            }]
+        }
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

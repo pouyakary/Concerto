@@ -12,7 +12,8 @@
 // ─── IMPORT ─────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit';
+    import * as compiler from '../../compilers/level1'
+    import * as genkit from '../genkit'
 
 //
 // ─── EXPORT ─────────────────────────────────────────────────────────────────────
@@ -27,7 +28,8 @@
                 node: node,
                 value: [{
                     type: 'boundary'
-                }]};
+                }]
+            }
 
         if ( node.assertionType === 'AssertNonWordBoundary' )
             return {
@@ -35,7 +37,8 @@
                 node: node,
                 value: [{
                     type: 'anything_but_boundary'
-                }]};
+                }]
+            }
 
         if ( node.assertionType === 'AssertEnd' )
             return {
@@ -43,7 +46,8 @@
                 node: node,
                 value: [{
                     type: 'line_end'
-                }]};
+                }]
+            }
 
         if ( node.assertionType === 'AssertBegin' )
             return {
@@ -51,9 +55,26 @@
                 node: node,
                 value: [{
                     type: 'line_start'
-                }]};
+                }]
+            }
 
-        throw 'Undefined node found.';
+        if ( node.assertionType === 'AssertNegativeLookahead' )
+            return {
+                type: 'block',
+                node: node,
+                value: [{
+                    type: 'lookahead',
+                    fields: [
+                        { name: 'status',  value: 'positive' }
+                    ],
+                    children: [
+                        genkit.generateStatement( compiler.compile( node.sub ) )
+                    ]
+                }]
+            }
+
+        console.log( node )
+        throw 'Undefined node found.'
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

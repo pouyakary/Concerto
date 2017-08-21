@@ -12,8 +12,8 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as compiler from '../../compilers/level1';
-    import * as genkit   from '../genkit';
+    import * as compiler from '../../compilers/level1'
+    import * as genkit   from '../genkit'
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
@@ -22,14 +22,14 @@
     export function generate ( node: blueprints.regulex.INodeGroup
                                   ): blueprints.block.IIntermediateNode {
 
-        let children = compiler.compile( node.sub );
+        let children = compiler.compile( node.sub )
 
         if ( node.nonCapture === true )
             return {
                 type: 'group',
                 node: node,
                 value: children
-            };
+            }
         else
             return {
                 type: 'block',
@@ -38,7 +38,7 @@
                     type: 'match',
                     children: [ genkit.generateStatement( children ) ]
                 }]
-            };
+            }
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

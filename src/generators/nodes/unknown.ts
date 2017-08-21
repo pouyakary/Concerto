@@ -12,43 +12,25 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as compiler from '../../compilers/level1'
-    import * as genkit   from '../genkit'
+    import * as genkit from '../genkit'
 
 //
 // ─── GENERATOR ──────────────────────────────────────────────────────────────────
 //
 
-    export function generate ( node: blueprints.regulex.INodeChoice
+    export function generate ( node: blueprints.regulex.IBaseNode
                                   ): blueprints.block.IIntermediateNode {
-        const children =
-            node.branches.map( branch =>  composeOptionBlock( branch ) )
 
         return {
             type: 'block',
             node: node,
             value: [{
-                type: 'one_of',
-                children: [
-                    genkit.generateStatement( children )
-                ]
+                type: 'free_form_regex',
+                fields: [{
+                    name: 'regex',
+                    value: genkit.encodeText( node.raw )
+                }]
             }]
-        }
-    }
-
-//
-// ─── COMPOS CHOICE ──────────────────────────────────────────────────────────────
-//
-
-    function composeOptionBlock ( branch: blueprints.regulex.IBaseNode[ ]
-                                       ): blueprints.block.IBlock {
-        return {
-            type: 'option',
-            children: [
-                genkit.generateStatement(
-                    compiler.compile( branch )
-                )
-            ]
         }
     }
 

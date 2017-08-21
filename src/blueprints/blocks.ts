@@ -24,8 +24,8 @@ module blueprints.block {
     //
 
         export interface IField {
-            name: string;
-            value: string;
+            name: string
+            value: string
         }
 
     //
@@ -34,13 +34,13 @@ module blueprints.block {
 
         export interface IBlock {
             /** Indicates what __Quartet block__ is this */
-            type: string;
+            type: string
 
             /** Fields */
-            fields?: IField[ ];
+            fields?: IField[ ]
 
             /** Children */
-            children?: IStatement[ ];
+            children?: IStatement[ ]
         }
 
     //
@@ -48,9 +48,9 @@ module blueprints.block {
     //
 
         export interface IIntermediateNode {
-            type: "block" | "group";
-            node: blueprints.regulex.IBaseNode;
-            value: IBlock[ ];
+            type: "block" | "group"
+            node: blueprints.regulex.IBaseNode
+            value: IBlock[ ]
         }
 
     // ────────────────────────────────────────────────────────────────────────────────

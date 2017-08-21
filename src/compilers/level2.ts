@@ -16,10 +16,10 @@
                                         ): blueprints.recarr.INode {
 
         if ( concertoAST.length === 0 )
-            throw 'Found ast with no length';
+            throw 'Found ast with no length'
 
-        let firstIndex = concertoAST[ 0 ];
-        let children = new Array<blueprints.recarr.IStatement> ( );
+        let firstIndex = concertoAST[ 0 ]
+        let children = new Array<blueprints.recarr.IStatement> ( )
 
         // is there any children?
         if ( firstIndex.children !== undefined && firstIndex.children !== null )
@@ -27,7 +27,7 @@
                 children.push({
                     name: statement.name,
                     block: compile( statement.children )
-                });
+                })
 
         // then it's time to return the new node
         if ( concertoAST.length === 1 )
@@ -35,14 +35,14 @@
                 type: firstIndex.type,
                 fields: firstIndex.fields,
                 statements: children
-            };
+            }
         else
             return {
                 type: firstIndex.type,
                 fields: firstIndex.fields,
                 statements: children,
                 next: compile( concertoAST.splice( 1 ) )
-            };
+            }
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

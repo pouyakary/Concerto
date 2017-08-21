@@ -23,6 +23,7 @@
     import * as lookaheadNode   from '../generators/nodes/lookahead'
     import * as assertNode      from '../generators/nodes/assert'
     import * as dotNode         from '../generators/nodes/dot'
+    import * as unknownNode     from '../generators/nodes/unknown'
 
 //
 // ─── EXPORTS ────────────────────────────────────────────────────────────────────
@@ -39,7 +40,8 @@
                 else
                     for ( let child of intermediateNode.value )
                         ast.push( child )
-                    }}
+            }
+        }
         return ast
     }
 
@@ -55,42 +57,46 @@
         switch ( node.type ) {
             case 'exact':
                 intermediateNode =
-                    exactNode.generate( node as blueprints.regulex.INodeExact );
-                    break;
+                    exactNode.generate( node as blueprints.regulex.INodeExact )
+                    break
 
             case 'charset':
                 intermediateNode =
-                    charsetNode.generate( node as blueprints.regulex.INodeSet );
-                    break;
+                    charsetNode.generate( node as blueprints.regulex.INodeSet )
+                    break
 
             case 'group':
                 intermediateNode =
-                    groupNode.generate( node as blueprints.regulex.INodeGroup );
-                    break;
+                    groupNode.generate( node as blueprints.regulex.INodeGroup )
+                    break
 
             case 'choice':
                 intermediateNode =
-                    choiceNode.generate( node as blueprints.regulex.INodeChoice );
-                    break;
+                    choiceNode.generate( node as blueprints.regulex.INodeChoice )
+                    break
 
             case 'dot':
                 intermediateNode =
-                    dotNode.generate( node );
-                    break;
+                    dotNode.generate( node )
+                    break
 
             case 'lookahead':
                 intermediateNode =
-                    lookaheadNode.generate( node as blueprints.regulex.INodeLookahead );
-                    break;
+                    lookaheadNode.generate( node as blueprints.regulex.INodeLookahead )
+                    break
 
             case 'assert':
                 intermediateNode =
-                    assertNode.generate( node as blueprints.regulex.INodeAssert );
-                    break;
-            }
+                    assertNode.generate( node as blueprints.regulex.INodeAssert )
+                    break
+
+            default:
+                intermediateNode =
+                    unknownNode.generate( node )
+        }
 
         // then we handle the repeat of the block
-        return repeats.generate( intermediateNode );
+        return repeats.generate( intermediateNode )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

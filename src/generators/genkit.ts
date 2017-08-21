@@ -18,7 +18,7 @@
         return {
             name: name,
             children: blocks
-        };
+        }
     }
 
 //
@@ -26,31 +26,39 @@
 //
 
     export function encodeText ( text: string ): string {
-        let result = new Array<string>( );
-        for ( let char of text ) {
+        let result = new Array<string>( )
+        for ( const char of text ) {
             switch ( char ) {
                 case '<':
-                    result.push( '&lt;' );
-                    break;
+                    result.push( '&lt;' )
+                    break
 
                 case '>':
-                    result.push( '&gt;' );
-                    break;
+                    result.push( '&gt;' )
+                    break
 
                 case '/':
-                    result.push( '\\/' );
-                    break;
+                    result.push( '\\/' )
+                    break
 
                 case '&':
-                    result.push( '&amp;' );
-                    break;
+                    result.push( '&amp;' )
+                    break
+
+                case '\\':
+                    result.push( '&#92;' )
+                    break
 
                 default:
-                    result.push( char );
+                    const key = char.charCodeAt( 0 )
+                    if ( 32 < key! && key! < 255 )
+                        result.push( char )
+                    else
+                        result.push( "&#" + key + ";" )
             }
         }
 
-        return result.join('');
+        return result.join( '' )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

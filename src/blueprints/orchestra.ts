@@ -15,9 +15,9 @@ module blueprints.orchestra {
     //
 
         export interface IOrchestraFileObject {
-            version: number;
-            workspaceXML: string;
-            playgroundText: string;
+            version: number
+            workspaceXML: string
+            playgroundText: string
             compilerOptions: {
                 target: 'es5' | 'es6',
                 format: 'regexp' | 'string',

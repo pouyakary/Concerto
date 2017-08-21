@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    import * as genkit from '../genkit';
+    import * as genkit from '../genkit'
 
 //
 // ─── GENERATORS ─────────────────────────────────────────────────────────────────
@@ -24,38 +24,38 @@
         // No Repeat
         if ( intermediateNode.node.repeat === undefined ) return intermediateNode
 
-        let min     = intermediateNode.node.repeat.min;
-        let max     = intermediateNode.node.repeat.max;
-        let blocks  = intermediateNode.value;
-        let result  : blueprints.block.IBlock[ ];
+        let min     = intermediateNode.node.repeat.min
+        let max     = intermediateNode.node.repeat.max
+        let blocks  = intermediateNode.value
+        let result  : blueprints.block.IBlock[ ]
 
         // Maybe block
         if ( min === 0 && max === 1 )
-            result = composeStaticRepeat( 'maybe', blocks );
+            result = composeStaticRepeat( 'maybe', blocks )
 
         // One or More
         else if ( min === 1 && max === Infinity )
-            result = composeStaticRepeat( 'one_or_more', blocks );
+            result = composeStaticRepeat( 'one_or_more', blocks )
 
         // Any number of
         else if ( min === 0 && max === Infinity )
-            result = composeStaticRepeat( 'any_number_of', blocks );
+            result = composeStaticRepeat( 'any_number_of', blocks )
 
         // Exact Repeat
         else if ( min === max )
-            result = composeExactRepeat( min, blocks );
+            result = composeExactRepeat( min, blocks )
 
         // At least repeat
         else if ( max === Infinity )
-            result = composeAtLeastRepeat( min, blocks );
+            result = composeAtLeastRepeat( min, blocks )
 
         // Range Repeat
-        else result = composeRangeRepeat( min, max, blocks );
+        else result = composeRangeRepeat( min, max, blocks )
 
         // done
-        intermediateNode.value = result;
+        intermediateNode.value = result
 
-        return intermediateNode;
+        return intermediateNode
     }
 
 //
@@ -69,7 +69,9 @@
             type: repeatType,
             children: [
                 genkit.generateStatement( blocks )
-            ]}]};
+            ]
+        }]
+    }
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
@@ -86,7 +88,9 @@
             }],
             children: [
                 genkit.generateStatement( blocks )
-            ]}]};
+            ]}
+        ]
+    }
 
 //
 // ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
@@ -103,7 +107,9 @@
             }],
             children: [
                 genkit.generateStatement( blocks )
-            ]}]};
+            ]}
+        ]
+    }
 
 //
 // ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
@@ -121,6 +127,8 @@
             ],
             children: [
                 genkit.generateStatement( blocks )
-            ]}]};
+            ]}
+        ]
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────
