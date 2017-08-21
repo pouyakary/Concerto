@@ -15,8 +15,8 @@ module blueprints.block {
     //
 
         export interface IStatement {
-            name: string;
-            children: IBlock[ ];
+            name: string
+            children: IBlock[ ]
         }
 
     //
